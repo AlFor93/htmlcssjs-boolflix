@@ -1,0 +1,14 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  cursor: default;
+}
+
+#searchBar-container {
+  margin-bottom: 40px;
+}
+
+#searchBar {
+  width: 300px;
+}
