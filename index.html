@@ -14,12 +14,14 @@
      <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js" charset="utf-8"></script>
      <!-- JS: MY TEMPLATE -->
      <script id="film-template" type="text/x-handlebars-template">
-      <ul class="film"
+      <ul class="film">
+        <br>
         <li>TITOLO : {{title}}</li>
         <li>TITOLO ORIGINALE : {{originalTitle}}</li>
-        <li>LINGUA ORIGINALE : {{lenguage}}</li>
+        <li class="lingua">LINGUA ORIGINALE : {{lenguage}} {{{flag}}}</li>
         <li>VOTO MEDIO : {{vote}}</li>
-        <li>{{{stars}}}</li>        
+        <li class="starsList">{{{stars}}}</li>
+        <br>
         <hr>
       </ul>
      </script>
@@ -28,9 +30,11 @@
      <title></title>
    </head>
    <body>
-     <div id="searchBar-container">
-       <input id="searchBar" type="text" name="" placeholder="Inserisci il titolo del film da cercare">
-       <button id="my-btn"type="button" name="button">Cerca</button>
+     <div class="navbar">
+       <div id="searchBar-container">
+         <input id="searchBar" type="text" name="" placeholder="Inserisci il titolo del film da cercare">
+         <button id="my-btn"type="button" name="button">Cerca</button>
+       </div>
      </div>
      <div class="film-container">
 
