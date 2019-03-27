@@ -1,5 +1,5 @@
 //FUNZIONE PER LA CREAZIONE DEL TEMPLATE RICEVENDO TUTTI I PARAMETRI ESTERNI DALLA CHIAMATA AJAX
-function addDataFilmsHB (title,originalTitle,lenguage,vote) {
+function addDataFilmsHB (title,originalTitle,lenguage,vote,copertina) {
   var data = {
     title : title,
     originalTitle : originalTitle,
@@ -7,6 +7,7 @@ function addDataFilmsHB (title,originalTitle,lenguage,vote) {
     flag : addFlags (lenguage),
     vote : vote,
     stars : addStars(vote),
+    copertina : copertina,
   };
 
   var template = $("#film-template").html();
@@ -83,7 +84,8 @@ function ajaxSearch (data) {
     var originalTitle = res[i].original_title;
     var lenguage = res[i].original_language;
     var vote = res[i].vote_average;
-    addDataFilmsHB (title,originalTitle,lenguage,vote);
+    var copertina = "https://image.tmdb.org/t/p/w342"+res[i].poster_path;
+    addDataFilmsHB (title,originalTitle,lenguage,vote,copertina);
   }
 }
 //FUNZIONE PER RICHIAMARE I DATI DI TUTTI I FILM CON UN DATO TITOLO, TRAMITE UN API
