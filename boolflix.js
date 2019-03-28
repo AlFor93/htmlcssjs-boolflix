@@ -84,7 +84,7 @@ function ajaxSearch (data) {
     var originalTitle = res[i].original_title;
     var lenguage = res[i].original_language;
     var vote = res[i].vote_average;
-    var copertina = "https://image.tmdb.org/t/p/w342"+res[i].poster_path;
+    var copertina = "https://image.tmdb.org/t/p/w185"+res[i].poster_path;
     addDataFilmsHB (title,originalTitle,lenguage,vote,copertina);
   }
 }

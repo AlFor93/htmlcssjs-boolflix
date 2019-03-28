@@ -14,16 +14,16 @@
      <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.1.0/handlebars.min.js" charset="utf-8"></script>
      <!-- JS: MY TEMPLATE -->
      <script id="film-template" type="text/x-handlebars-template">
-      <ul class="film">
+      <ul class="film" style="background-image:url({{copertina}})">
         <br>
         <li>TITOLO : {{title}}</li>
         <li>TITOLO ORIGINALE : {{originalTitle}}</li>
         <li class="lingua">LINGUA ORIGINALE : {{lenguage}} {{{flag}}}</li>
         <li>VOTO MEDIO : {{vote}}</li>
         <li class="starsList">{{{stars}}}</li>
-        <img src="{{copertina}}"></img>
+        <!-- <img src="{{copertina}}"></img> -->
         <br>
-        <hr>
+        <!-- <hr> -->
       </ul>
      </script>
      <!-- JS: MY JS -->
@@ -32,6 +32,7 @@
    </head>
    <body>
      <div class="navbar">
+       <p id="logo">BOOLFLIX</p>
        <div id="searchBar-container">
          <input id="searchBar" type="text" name="" placeholder="Inserisci il titolo del film da cercare">
          <button id="my-btn"type="button" name="button">Cerca</button>

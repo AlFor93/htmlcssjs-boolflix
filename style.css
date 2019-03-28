@@ -3,15 +3,23 @@
   padding: 0;
   box-sizing: border-box;
   cursor: default;
+  list-style-type: none;
 }
 
 .navbar {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   margin: auto;
-  width: 600px;
+  width: 100vw;
   height: 100px;
+  background-color: black;
+}
+
+#logo{
+  color: firebrick;
+  font-weight: 600;
+  font-size: 30px;
 }
 
 #searchBar {
@@ -19,10 +27,22 @@
 }
 
 .film-container {
-  margin: auto;
-  width: 700px;
+  display: flex;
+  flex-wrap: wrap;
+  width: 50%;
   height: calc(100vh - 150px);
-  padding-left: 50px;
+}
+
+.film {
+  width: 185px;
+  height: 240px;
+  margin: 10px;
+  cursor: pointer;
+}
+
+.film:hover {
+  background-image: bisque;
+  /* background-color: #cecece; */
 }
 
 .lingua {
