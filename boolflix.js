@@ -18,10 +18,10 @@ function addDataFilmsHB (title,originalTitle,lenguage,vote,copertina) {
   filmsCont.append(finalMessageFormHtml);
 }
 //FUNZIONE PER LA CREAZIONE DEL TEMPLATE RICEVENDO TUTTI I PARAMETRI ESTERNI DALLA CHIAMATA AJAX
-function addDataSeriesHB (name,lenguage,vote,copertina) {
+function addDataSeriesHB (name,originalName,lenguage,vote,copertina) {
   var data = {
     title : name.toUpperCase(),
-    // originalTitle : originalTitle,
+    originalTitle : originalName,
     lenguage : lenguage,
     flag : addFlags (lenguage),
     vote : vote,
@@ -101,13 +101,20 @@ function ajaxSearch (data) {
   for (var i = 0; i < res.length; i++) {
     var title = res[i].title;
     var name = res[i].name;
+    var originalName = res[i].original_name;
     var originalTitle = res[i].original_title;
     var lenguage = res[i].original_language;
     var vote = res[i].vote_average;
-    var copertina = "https://image.tmdb.org/t/p/w185"+res[i].poster_path;
-    addDataFilmsHB (title,originalTitle,lenguage,vote,copertina);
-    console.log(name);
-    addDataSeriesHB (name,lenguage,vote,copertina);
+    if (res[i].poster_path==null) {
+      var copertina = "https://www.interserver.net/tips/wp-content/uploads/2016/10/404error.jpeg";
+    } else {
+      var copertina = "https://image.tmdb.org/t/p/w185"+res[i].poster_path;
+    }
+    if (title) {
+      addDataFilmsHB (title,originalTitle,lenguage,vote,copertina);
+    } else {
+      addDataSeriesHB (name,originalName,lenguage,vote,copertina);
+    }
   }
 }
 //FUNZIONE PER RICHIAMARE I DATI DI TUTTI I FILM CON UN DATO TITOLO, TRAMITE UN API
@@ -123,9 +130,6 @@ function filmAjaxCall () {
       // page :
     },
     success: function (inData){
-      // var pages = inData.total_pages;
-      // console.log("total pages: " + pages);
-      clearOldData();
       ajaxSearch(inData);
     },
     error: function (request, state, error){
@@ -136,7 +140,7 @@ function filmAjaxCall () {
 
   });
 }
-//FUNZIONE PER RICHIAMARE I DATI DI TUTTI I FILM CON UN DATO TITOLO, TRAMITE UN API
+//FUNZIONE PER RICHIAMARE I DATI DI TUTTe LE SERIE TV CON UN DATO TITOLO, TRAMITE UN API
 function seriesAjaxCall () {
   var search = $("#searchBar").val();
   $.ajax({
@@ -149,7 +153,6 @@ function seriesAjaxCall () {
       // page :
     },
     success: function (inData){
-      clearOldData();
       ajaxSearch(inData);
     },
     error: function (request, state, error){
@@ -183,11 +186,15 @@ function filmDataOnHover () {
 
 function init() {
   var searchButton = $("#my-btn");
-  searchButton.click(filmAjaxCall);
-  searchButton.click(seriesAjaxCall);
+  searchButton.click(function(){
+    clearOldData();
+    filmAjaxCall();
+    seriesAjaxCall();
+  });
   var search = $("#searchBar");
   search.on("keyup",function(){
     if (event.which==13) {
+      clearOldData();
       filmAjaxCall();
       seriesAjaxCall();
     }

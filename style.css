@@ -9,7 +9,13 @@
 .container {
   width: 100vw;
   height: 100vh;
-  background-color: #c3c3ce;
+  background-color: #c6c2ce;
+}
+
+.container:after {
+  content: "";
+  clear: both;
+  display: table;
 }
 
 .navbar {
@@ -18,7 +24,7 @@
   align-items: center;
   margin: auto;
   width: 100vw;
-  height: 100px;
+  height: 120px;
   background-color: black;
 }
 
@@ -35,24 +41,33 @@
   border: none;
   text-align: center;
   font-size: 17px;
+  outline: 0;
 }
 
 #my-btn {
-  height: 30px;
   width: 100px;
+  height: 30px;
   border-radius: 20px;
   border: none;
   margin-left: 30px;
   background-color: #B22222;
   font-size: 18px;
+  outline: 0;
 }
 
 .film-container {
   display: flex;
   flex-wrap: wrap;
   width: 50%;
-  height: calc(100% - 100px);
+  min-height: calc(100vh - 120px);
   float: left;
+  overflow: auto;
+}
+
+h1 {
+  width: 100%;
+  text-align: center;
+  margin-top: 40px;
 }
 
 .film {
@@ -84,13 +99,16 @@
 }
 
 .flagSize {
-  width: 50px;
-  height: 25px;
+  width: 40px;
+  height: 20px;
 }
 
 .series-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   width: 50%;
-  height: calc(100% - 100px);
-  background-color: aqua;
+  min-height: calc(100vh - 120px);
   float: right;
+  overflow: auto;
 }
