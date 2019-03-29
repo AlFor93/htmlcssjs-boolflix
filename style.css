@@ -6,6 +6,12 @@
   list-style-type: none;
 }
 
+.container {
+  width: 100vw;
+  height: 100vh;
+  background-color: #c3c3ce;
+}
+
 .navbar {
   display: flex;
   justify-content: space-around;
@@ -24,25 +30,50 @@
 
 #searchBar {
   width: 300px;
+  height: 30px;
+  border-radius: 15px;
+  border: none;
+  text-align: center;
+  font-size: 17px;
+}
+
+#my-btn {
+  height: 30px;
+  width: 100px;
+  border-radius: 20px;
+  border: none;
+  margin-left: 30px;
+  background-color: #B22222;
+  font-size: 18px;
 }
 
 .film-container {
   display: flex;
   flex-wrap: wrap;
   width: 50%;
-  height: calc(100vh - 150px);
+  height: calc(100% - 100px);
+  float: left;
 }
 
 .film {
+  background-position: center;
   width: 185px;
   height: 240px;
-  margin: 10px;
+  margin: 20px 0 0 20px;
   cursor: pointer;
 }
 
-.film:hover {
-  background-image: bisque;
-  /* background-color: #cecece; */
+.info-container {
+  display: none;
+  width: 100%;
+  height: 100%;
+  padding: 10px;
+  background-color: #011919e8;
+  color: beige;
+}
+
+.info-container li{
+  margin-top: 10px;
 }
 
 .lingua {
@@ -55,4 +86,11 @@
 .flagSize {
   width: 50px;
   height: 25px;
+}
+
+.series-container {
+  width: 50%;
+  height: calc(100% - 100px);
+  background-color: aqua;
+  float: right;
 }

@@ -1,7 +1,7 @@
 //FUNZIONE PER LA CREAZIONE DEL TEMPLATE RICEVENDO TUTTI I PARAMETRI ESTERNI DALLA CHIAMATA AJAX
 function addDataFilmsHB (title,originalTitle,lenguage,vote,copertina) {
   var data = {
-    title : title,
+    title : title.toUpperCase(),
     originalTitle : originalTitle,
     lenguage : lenguage,
     flag : addFlags (lenguage),
@@ -16,6 +16,25 @@ function addDataFilmsHB (title,originalTitle,lenguage,vote,copertina) {
 
   var filmsCont = $(".film-container")
   filmsCont.append(finalMessageFormHtml);
+}
+//FUNZIONE PER LA CREAZIONE DEL TEMPLATE RICEVENDO TUTTI I PARAMETRI ESTERNI DALLA CHIAMATA AJAX
+function addDataSeriesHB (name,lenguage,vote,copertina) {
+  var data = {
+    title : name.toUpperCase(),
+    // originalTitle : originalTitle,
+    lenguage : lenguage,
+    flag : addFlags (lenguage),
+    vote : vote,
+    stars : addStars(vote),
+    copertina : copertina,
+  };
+
+  var template = $("#film-template").html();
+  var compiled = Handlebars.compile(template);
+  var finalMessageFormHtml = compiled(data);
+
+  var seriesCont = $(".series-container")
+  seriesCont.append(finalMessageFormHtml);
 }
 //FUNZIONE PER CONVERTIRE IL VOTO (ARROTONDATO all'intero più vicino) IN STELLE
 function addStars (vote) {
@@ -53,7 +72,7 @@ function addFlags (lenguage) {
       flag.src = "flags_img/Flag_of_Spain.svg";
       break;
 
-    default: flag.src = "flags_img/boh.png";
+    // default: flag.src = "flags_img/boh.png";
   }
 
   //Stessa cosa utilizzando una serie di if else concatenati
@@ -81,15 +100,18 @@ function ajaxSearch (data) {
   var res = data.results;
   for (var i = 0; i < res.length; i++) {
     var title = res[i].title;
+    var name = res[i].name;
     var originalTitle = res[i].original_title;
     var lenguage = res[i].original_language;
     var vote = res[i].vote_average;
     var copertina = "https://image.tmdb.org/t/p/w185"+res[i].poster_path;
     addDataFilmsHB (title,originalTitle,lenguage,vote,copertina);
+    console.log(name);
+    addDataSeriesHB (name,lenguage,vote,copertina);
   }
 }
 //FUNZIONE PER RICHIAMARE I DATI DI TUTTI I FILM CON UN DATO TITOLO, TRAMITE UN API
-function ajaxCall () {
+function filmAjaxCall () {
   var search = $("#searchBar").val();
   $.ajax({
     url: "https://api.themoviedb.org/3/search/movie",
@@ -114,7 +136,37 @@ function ajaxCall () {
 
   });
 }
+//FUNZIONE PER RICHIAMARE I DATI DI TUTTI I FILM CON UN DATO TITOLO, TRAMITE UN API
+function seriesAjaxCall () {
+  var search = $("#searchBar").val();
+  $.ajax({
+    url: "https://api.themoviedb.org/3/search/tv",
+    method: "GET",
+    data: {
+      api_key: "904095b7e749c808eeb90f272724f68e",
+      language: "it-IT",
+      query: search,
+      // page :
+    },
+    success: function (inData){
+      clearOldData();
+      ajaxSearch(inData);
+    },
+    error: function (request, state, error){
+      console.log("request",request);
+      console.log("state",state);
+      console.log("error", error);
+    }
 
+  });
+}
+//FUNZIONE PER MOSTRARE I DATI DEL FILM ON HOVER
+function filmDataOnHover () {
+  var selectedFilm = $(this);
+  var infoCont = selectedFilm.find(".info-container");
+
+  infoCont.toggle();
+}
 
 
 
@@ -131,13 +183,18 @@ function ajaxCall () {
 
 function init() {
   var searchButton = $("#my-btn");
-  searchButton.click(ajaxCall);
+  searchButton.click(filmAjaxCall);
+  searchButton.click(seriesAjaxCall);
   var search = $("#searchBar");
   search.on("keyup",function(){
     if (event.which==13) {
-      ajaxCall();
+      filmAjaxCall();
+      seriesAjaxCall();
     }
   });
+
+  $(document).on("mouseenter", ".film", filmDataOnHover)
+  $(document).on("mouseleave", ".film", filmDataOnHover)
 }
 
 $(document).ready(init);

@@ -15,15 +15,13 @@
      <!-- JS: MY TEMPLATE -->
      <script id="film-template" type="text/x-handlebars-template">
       <ul class="film" style="background-image:url({{copertina}})">
-        <br>
-        <li>TITOLO : {{title}}</li>
-        <li>TITOLO ORIGINALE : {{originalTitle}}</li>
-        <li class="lingua">LINGUA ORIGINALE : {{lenguage}} {{{flag}}}</li>
-        <li>VOTO MEDIO : {{vote}}</li>
-        <li class="starsList">{{{stars}}}</li>
-        <!-- <img src="{{copertina}}"></img> -->
-        <br>
-        <!-- <hr> -->
+        <div class="info-container">
+          <li><b><u>{{title}}</u></b></li>
+          <li>TITOLO ORIGINALE : {{originalTitle}}</li>
+          <li class="lingua">LINGUA ORIGINALE : {{lenguage}} {{{flag}}}</li>
+          <li>VOTO MEDIO : {{vote}}</li>
+          <li class="starsList">{{{stars}}}</li>
+        </div>
       </ul>
      </script>
      <!-- JS: MY JS -->
@@ -31,14 +29,18 @@
      <title></title>
    </head>
    <body>
-     <div class="navbar">
-       <p id="logo">BOOLFLIX</p>
-       <div id="searchBar-container">
-         <input id="searchBar" type="text" name="" placeholder="Inserisci il titolo del film da cercare">
-         <button id="my-btn"type="button" name="button">Cerca</button>
+     <div class="container">
+       <div class="navbar">
+         <p id="logo">BOOLFLIX</p>
+         <div id="searchBar-container">
+           <input id="searchBar" type="text" name="" placeholder="Inserisci il titolo del film da cercare">
+           <button id="my-btn"type="button" name="button">Cerca</button>
+         </div>
        </div>
-     </div>
-     <div class="film-container">
+       <div class="film-container">
+       </div>
+       <div class="series-container">
+       </div>
      </div>
    </body>
  </html>
