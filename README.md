@@ -10,11 +10,12 @@ Semplice e intuitivo: tutto passa per la barra di ricerca.
 <hr>
 
 # Ricerca
-Il sito fornisce due colonne differenti in cui vengono mostrati (se presenti sia come film, che come serie tv) i risultati della ricerca
+Il sito fornisce due colonne differenti in cui vengono mostrati (se presenti sia come film, che come serie tv) i risultati della ricerca.
 
-![]()
+
+![](scree.png)
 
 <hr>
 
-![]()
+![](screenshot.PNG)
 
